@@ -41,11 +41,12 @@ export default () => {
       .then(([user, repos]) => [user.data, repos.data])
       .then(([userData, userRepos]) => createProfile(userData, userRepos))
       .then(profile => res.json(profile))
-      .catch(
+      .catch(err => {
+        console.log('Error handling Get user request: ', err)
         res.json({
-          message: `User with username \"${username}\" does not exist`
+          message: `User with username "${username}" does not exist`
         })
-      )
+      })
   })
 
   /** GET /api/users?username - Get users */

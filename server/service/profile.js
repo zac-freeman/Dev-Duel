@@ -57,7 +57,10 @@ const decreeTitles = (userData, reposData) => {
   } else if (userData.followers >= userData.following * 2) {
     titles.push('Mr. Popular')
   }
-  if (reposData.highest_starred * 2 >= reposData.total_stars) {
+  if (
+    reposData.highest_starred * 2 >= reposData.total_stars &&
+    reposData.total_stars > 0
+  ) {
     titles.push('One Hit Wonder')
   }
   return titles
