@@ -25,13 +25,7 @@ export default () => {
   /** GET /api/user/:username - Get user */
   router.get('/user/:username', validate(validation.user), (req, res) => {
     const username = req.params.username
-    /*
-      TODO
-      Fetch data for user specified in path variable
-      parse/map data to appropriate structure and return as json
-    */
 
-    // Example request for fetching and logging results from the first user in the query array
     Promise.all([
       axios.get(`http://api.github.com/users/${username}`, {
         headers: {
@@ -47,7 +41,11 @@ export default () => {
       .then(([user, repos]) => [user.data, repos.data])
       .then(([userData, userRepos]) => createProfile(userData, userRepos))
       .then(profile => res.json(profile))
-      .catch(err => console.log('Error making GET request', err))
+      .catch(
+        res.json({
+          message: `User with username \"${username}\" does not exist`
+        })
+      )
   })
 
   /** GET /api/users?username - Get users */
