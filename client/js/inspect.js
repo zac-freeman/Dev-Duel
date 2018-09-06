@@ -10,12 +10,8 @@ $('form').submit(() => {
     .then(data => {
       console.log(`Got data for ${username}`)
       console.log(data)
-      /*
-        TODO
-        Attach the data returned to the DOM
-        The data currently hard-coded into the DOM is placeholder data
-       */
 
+      postProfile(data)
       $('.user-results').removeClass('hide') // Display '.user-results' element
     })
     .catch(err => {
@@ -30,3 +26,13 @@ $('form').submit(() => {
 
   return false // return false to prevent default form submission
 })
+
+postProfile = profile => {
+  for (let prop in profile) {
+    $(`.${prop}`).removeClass('hide')
+    if (profile[prop] === null) {
+      $(`.${prop}`).addClass('hide')
+    }
+    $(`.${prop}`).html(`${profile[prop]}`)
+  }
+}

@@ -42,6 +42,7 @@ export default () => {
       .then(([userData, userRepos]) => createProfile(userData, userRepos))
       .then(profile => res.json(profile))
       .catch(err => {
+        // TODO: improve error handling using catches between thens and APIError
         console.log('Error handling Get user request: ', err)
         res.json({
           message: `User with username "${username}" does not exist`

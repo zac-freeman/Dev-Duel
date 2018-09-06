@@ -2,17 +2,19 @@ export const createProfile = (userData, userRepos) => {
   let reposData = parseReposData(userRepos)
 
   return {
+    // TODO: change names here and in inspect.html to be more consistent with eachother
     username: userData.login,
-    name: userData.name,
+    'full-name': userData.name,
     location: userData.location,
+    email: userData.email,
     bio: userData.bio,
-    avatar_url: userData.avatar_url,
+    avatar: userData.avatar_url,
     titles: decreeTitles(userData, reposData),
-    favorite_language: findPropertyOfMax(reposData.languages),
-    public_repos: userData.public_repos,
-    total_stars: reposData.total_stars,
-    highest_starred: reposData.highest_starred,
-    perfect_repos: reposData.perfect_repos,
+    'favorite-language': findPropertyOfMax(reposData.languages),
+    'total-stars': reposData.total_stars,
+    'most-starred': reposData.highest_starred,
+    'public-repos': userData.public_repos,
+    'perfect-repos': reposData.perfect_repos,
     followers: userData.followers,
     following: userData.following
   }
@@ -69,6 +71,9 @@ const decreeTitles = (userData, reposData) => {
 const findPropertyOfMax = obj =>
   Object.entries(obj).reduce(
     (max, current) => {
+      if (current[0] === 'null') {
+        current[0] = 'None'
+      }
       return current[1] > max[1] ? current : max
     },
     ['None', 0]
