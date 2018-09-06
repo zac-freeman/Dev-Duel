@@ -72,7 +72,7 @@ const findPropertyOfMax = obj =>
   Object.entries(obj).reduce(
     (max, current) => {
       if (current[0] === 'null') {
-        current[0] = 'None'
+        current[0] = 'Unknown'
       }
       return current[1] > max[1] ? current : max
     },
