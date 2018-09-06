@@ -27,12 +27,16 @@ $('form').submit(() => {
   return false // return false to prevent default form submission
 })
 
+// TODO: seperate titles array elements with spaces
 postProfile = profile => {
   for (let prop in profile) {
-    $(`.${prop}`).removeClass('hide')
+    $(`span.${prop}`).removeClass(' hide')
     if (profile[prop] === null) {
-      $(`.${prop}`).addClass('hide')
+      $(`span.${prop}`).addClass(' hide')
     }
-    $(`.${prop}`).html(`${profile[prop]}`)
+
+    $(`span.${prop}`).text(profile[prop])
   }
+
+  $(`img.avatar`).attr('src', profile['avatar'])
 }
