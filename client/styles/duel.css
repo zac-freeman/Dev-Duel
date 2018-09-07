@@ -72,3 +72,23 @@ span.username {
 .yellow-stat {
     background-color: yellow;
 }
+
+.winner {
+    border: 2px solid green;
+    border-radius: 5px;
+}
+
+.loser {
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
+.coloser {
+    border: 2px solid yellow;
+    border-radius: 5px;
+}
+
+.status {
+    color: green;
+    font-weight: bold;
+}

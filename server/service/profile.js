@@ -51,7 +51,7 @@ const decreeTitles = (userData, reposData) => {
   }
   if (Object.keys(reposData.languages).length === 1) {
     titles.push('One Trick Pony')
-  } else if (Object.keys(reposData.languages).length >= 10) {
+  } else if (Object.keys(reposData.languages).length > 10) {
     titles.push('Jack of All Trades')
   }
   if (userData.following >= userData.followers * 2 && userData.following > 0) {
