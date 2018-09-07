@@ -54,9 +54,12 @@ const decreeTitles = (userData, reposData) => {
   } else if (Object.keys(reposData.languages).length >= 10) {
     titles.push('Jack of All Trades')
   }
-  if (userData.following >= userData.followers * 2) {
+  if (userData.following >= userData.followers * 2 && userData.following > 0) {
     titles.push('Stalker')
-  } else if (userData.followers >= userData.following * 2) {
+  } else if (
+    userData.followers >= userData.following * 2 &&
+    userData.followers > 0
+  ) {
     titles.push('Mr. Popular')
   }
   if (
@@ -65,6 +68,10 @@ const decreeTitles = (userData, reposData) => {
   ) {
     titles.push('One Hit Wonder')
   }
+  if (titles.length === 0) {
+    titles.push('None')
+  }
+
   return titles
 }
 
