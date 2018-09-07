@@ -46,6 +46,12 @@ export default () => {
     Promise.all(
       usernames.map(username => Promise.all(getUserAndRepos(username)))
     )
+      .catch(err => {
+        console.log(err)
+        res.status(404).json({
+          message: `One or more users with usernames ${usernames.map(u => `"${u}"`)} do not exist.`
+        })
+      })
       .then(usersAndRepos =>
         usersAndRepos.map(([user, repos]) => [user.data, repos.data])
       )

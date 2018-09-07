@@ -5,12 +5,24 @@ $('form').submit(() => {
   const rightUsername = $('form input[name="username-right"]').val()
 
   fetch(`${USERS_URL}?username=${leftUsername}&username=${rightUsername}`)
+    .then(response => {
+      if (response.status === 404 || response.status === 400) {
+        $('.duel-container').removeClass('hide')
+        $('.duel-container').addClass('hide')
+        $('.duel-error').removeClass('hide')
+      } else {
+        $('.duel-error').removeClass('hide')
+        $('.duel-error').addClass('hide')
+        $('.duel-container').removeClass('hide')
+      }
+      return response
+    })
     .then(response => response.json())
     .then(profiles => {
+      $('.duel-error .message').text(profiles['message'])
       postProfile(profiles[0], 'left')
       postProfile(profiles[1], 'right')
       ordainChampion(profiles)
-      $('.duel-container').removeClass('hide')
     })
     .catch(err => console.log('Error dueling users: ', err))
 
