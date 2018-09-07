@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-// TODO: seperate titles array elements with spaces
+// TODO: figure out why this doesnt work in this file
 export const postProfile = profile => {
   for (let prop in profile) {
     $(`span.${prop}`).removeClass(' hide')

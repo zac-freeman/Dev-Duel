@@ -26,18 +26,7 @@ export default () => {
   router.get('/user/:username', validate(validation.user), (req, res) => {
     const username = req.params.username
 
-    Promise.all([
-      axios.get(`http://api.github.com/users/${username}`, {
-        headers: {
-          Authorization: token
-        }
-      }),
-      axios.get(`http://api.github.com/users/${username}/repos`, {
-        headers: {
-          Authorization: token
-        }
-      })
-    ])
+    Promise.all(getUserAndRepos(username))
       .then(([user, repos]) => [user.data, repos.data])
       .then(([userData, userRepos]) => createProfile(userData, userRepos))
       .then(profile => res.json(profile))
@@ -52,6 +41,18 @@ export default () => {
 
   /** GET /api/users?username - Get users */
   router.get('/users/', validate(validation.users), (req, res) => {
+    let usernames = req.query.username
+
+    Promise.all(
+      usernames.map(username => Promise.all(getUserAndRepos(username)))
+    )
+      .then(usersAndRepos =>
+        usersAndRepos.map(([user, repos]) => [user.data, repos.data])
+      )
+      .then(usersAndRepos =>
+        usersAndRepos.map(([user, repos]) => createProfile(user, repos))
+      )
+      .then(profiles => res.json(profiles))
     /*
       TODO
       Fetch data for users specified in query
@@ -63,11 +64,24 @@ export default () => {
 
     // The following is an example response using the express res.json() function
     // This doesn't model the required response object and is only used for validating the endpoint exist
-    return res.json([
-      { username: 'example-user-1' },
-      { username: 'example-user-2' }
-    ])
+    // return res.json([
+    //   { username: 'example-user-1' },
+    //   { username: 'example-user-2' }
+    // ])
   })
 
   return router
 }
+
+const getUserAndRepos = username => [
+  axios.get(`http://api.github.com/users/${username}`, {
+    headers: {
+      Authorization: token
+    }
+  }),
+  axios.get(`http://api.github.com/users/${username}/repos`, {
+    headers: {
+      Authorization: token
+    }
+  })
+]

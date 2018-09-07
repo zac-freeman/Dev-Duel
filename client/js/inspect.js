@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 
-import { postProfile } from '../service/postProfile'
+// TODO: figure out why this doesnt work
+// import { postProfile } from '../service/postProfile'
 
 $('form').submit(() => {
   const username = $('form input').val()
@@ -29,3 +30,17 @@ $('form').submit(() => {
 
   return false // return false to prevent default form submission
 })
+
+// TODO: seperate titles array elements with spaces
+const postProfile = profile => {
+  for (let prop in profile) {
+    $(`span.${prop}`).removeClass(' hide')
+    if (profile[prop] === null) {
+      $(`span.${prop}`).addClass(' hide')
+    }
+
+    $(`span.${prop}`).text(profile[prop])
+  }
+
+  $(`img.avatar`).attr('src', profile['avatar'])
+}
