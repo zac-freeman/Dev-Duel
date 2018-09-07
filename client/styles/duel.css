@@ -60,3 +60,15 @@ span.username {
     justify-content: flex-end;
     white-space: nowrap;
 }
+
+.green-stat {
+    background-color: green;
+}
+
+.red-stat {
+    background-color: red;
+}
+
+.yellow-stat {
+    background-color: yellow;
+}
