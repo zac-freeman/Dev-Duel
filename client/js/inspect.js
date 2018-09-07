@@ -5,17 +5,13 @@
 
 $('form').submit(() => {
   const username = $('form input').val()
-  console.log(`examining ${username}`)
 
   // Fetch data for given user
   // (https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
   fetch(`${USER_URL}/${username}`)
     .then(response => response.json()) // Returns parsed json data from response body as promise
-    .then(data => {
-      console.log(`Got data for ${username}`)
-      console.log(data)
-
-      postProfile(data)
+    .then(profile => {
+      postProfile(profile)
       $('.user-results').removeClass('hide') // Display '.user-results' element
     })
     .catch(err => {
@@ -34,9 +30,9 @@ $('form').submit(() => {
 // TODO: seperate titles array elements with spaces
 const postProfile = profile => {
   for (let prop in profile) {
-    $(`span.${prop}`).removeClass(' hide')
+    $(`span.${prop}`).removeClass('hide')
     if (profile[prop] === null) {
-      $(`span.${prop}`).addClass(' hide')
+      $(`span.${prop}`).addClass('hide')
     }
 
     $(`span.${prop}`).text(profile[prop])

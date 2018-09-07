@@ -53,21 +53,6 @@ export default () => {
         usersAndRepos.map(([user, repos]) => createProfile(user, repos))
       )
       .then(profiles => res.json(profiles))
-    /*
-      TODO
-      Fetch data for users specified in query
-      parse/map data to appropriate structure and return as json
-
-      If req.query.usernames is defined but not an array, that means the client only specified one user
-      For convenience to the users of our API, if the client only specified one user, we will fetch that user like we do in /user/:userId
-    */
-
-    // The following is an example response using the express res.json() function
-    // This doesn't model the required response object and is only used for validating the endpoint exist
-    // return res.json([
-    //   { username: 'example-user-1' },
-    //   { username: 'example-user-2' }
-    // ])
   })
 
   return router

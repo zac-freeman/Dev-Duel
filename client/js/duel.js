@@ -1,4 +1,17 @@
 /* eslint-disable no-undef */
+
+$('form').submit(() => {
+  const leftUsername = $('form input[name="username-left"]').val()
+  const rightUsername = $('form input[name="username-right"]').val()
+
+  // fetch(`${USER_URL}?username=${usernames[0]}&username=${usernames[1]}`)
+  //   .then(response => response.json())
+  //   .then(profiles => {
+  //     profiles.map(profile => postProfile(profile))
+  //     $('.duel-container').removeClass('hide')
+  //   })
+})
+
 /*
   TODO
   Fetch 2 user's github data and display their profiles side by side

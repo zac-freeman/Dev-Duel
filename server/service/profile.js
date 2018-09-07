@@ -46,7 +46,7 @@ const parseReposData = repos =>
 
 const decreeTitles = (userData, reposData) => {
   let titles = []
-  if (reposData.forks * 2 >= userData.public_repos) {
+  if (reposData.forks * 2 >= userData.public_repos && reposData.forks > 0) {
     titles.push('Forker')
   }
   if (Object.keys(reposData.languages).length === 1) {
