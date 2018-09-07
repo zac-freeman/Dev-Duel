@@ -9,19 +9,25 @@ $('form').submit(() => {
   // Fetch data for given user
   // (https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
   fetch(`${USER_URL}/${username}`)
+    .then(response => {
+      if (response.status === 404 || response.status === 400) {
+        $('.user-results').removeClass('hide')
+        $('.user-results').addClass('hide')
+        $('.user-error').removeClass('hide')
+      } else {
+        $('.user-error').removeClass('hide')
+        $('.user-error').addClass('hide')
+        $('.user-results').removeClass('hide')
+      }
+      return response
+    })
     .then(response => response.json()) // Returns parsed json data from response body as promise
     .then(profile => {
       postProfile(profile)
-      $('.user-results').removeClass('hide') // Display '.user-results' element
     })
     .catch(err => {
       console.log(`Error getting data for ${username}`)
       console.log(err)
-      /*
-        TODO
-        If there is an error finding the user, instead toggle the display of the '.user-error' element
-        and populate it's inner span '.error' element with an appropriate error message
-      */
     })
 
   return false // return false to prevent default form submission

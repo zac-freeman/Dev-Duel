@@ -14,7 +14,7 @@ $('form').submit(() => {
     })
     .catch(err => console.log('Error dueling users: ', err))
 
-  return false
+  return false // return false to prevent default form submission
 })
 
 const postProfile = (profile, side) => {
