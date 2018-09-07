@@ -1,8 +1,5 @@
 /* eslint-disable no-undef */
 
-// TODO: figure out why this doesnt work
-// import { postProfile } from '../service/postProfile'
-
 $('form').submit(() => {
   const username = $('form input').val()
 
@@ -33,7 +30,6 @@ $('form').submit(() => {
   return false // return false to prevent default form submission
 })
 
-// TODO: seperate titles array elements with spaces
 const postProfile = profile => {
   for (let prop in profile) {
     $(`span.${prop}`).removeClass('hide')

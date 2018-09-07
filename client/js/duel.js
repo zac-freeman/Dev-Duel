@@ -111,5 +111,3 @@ const clearChampion = () => {
   $('.right').removeClass('loser')
   $('.right').removeClass('coloser')
 }
-
-// TODO: handle nonexistent users
