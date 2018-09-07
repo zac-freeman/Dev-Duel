@@ -2,17 +2,16 @@ export const createProfile = (userData, userRepos) => {
   let reposData = parseReposData(userRepos)
 
   return {
-    // TODO: change names here and in inspect.html to be more consistent with eachother
     username: userData.login,
-    'full-name': userData.name,
+    name: userData.name,
     location: userData.location,
     email: userData.email,
     bio: userData.bio,
-    avatar: userData.avatar_url,
+    'avatar-url': userData.avatar_url,
     titles: decreeTitles(userData, reposData),
     'favorite-language': findPropertyOfMax(reposData.languages),
     'total-stars': reposData.total_stars,
-    'most-starred': reposData.highest_starred,
+    'highest-starred': reposData.highest_starred,
     'public-repos': userData.public_repos,
     'perfect-repos': reposData.perfect_repos,
     followers: userData.followers,

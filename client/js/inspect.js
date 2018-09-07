@@ -38,5 +38,5 @@ const postProfile = profile => {
     $(`span.${prop}`).text(profile[prop])
   }
 
-  $(`img.avatar`).attr('src', profile['avatar'])
+  $(`img.avatar-url`).attr('src', profile['avatar-url'])
 }

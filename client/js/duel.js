@@ -27,7 +27,7 @@ const postProfile = (profile, side) => {
     $(`.${side} span.${prop}`).text(profile[prop])
   }
 
-  $(`.${side} img.avatar`).attr('src', profile['avatar'])
+  $(`.${side} img.avatar-url`).attr('src', profile['avatar-url'])
 }
 
 // record determines winner: record > 0 => left wins
@@ -36,7 +36,7 @@ const postProfile = (profile, side) => {
 const ordainChampion = profiles => {
   let record = 0
   record += assignStatColors('total-stars', profiles)
-  record += assignStatColors('most-starred', profiles)
+  record += assignStatColors('highest-starred', profiles)
   record += assignStatColors('public-repos', profiles)
   record += assignStatColors('perfect-repos', profiles)
   record += assignStatColors('followers', profiles)
@@ -80,7 +80,7 @@ const displayChampion = record => {
     $('.left').addClass('winner')
     $('.right').addClass('loser')
   } else if (record < 0) {
-    $('.left span.status').removeClass('hide')
+    $('.right span.status').removeClass('hide')
     $('.left').addClass('loser')
     $('.right').addClass('winner')
   } else {
